@@ -4,41 +4,226 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d1426">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'">
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'"
+  >
   <title>Animal Kaiser Tournament</title>
   <link rel="icon" href="trophy.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="home-screen" id="home-screen">
-    <header class="home-header"><div class="brand"><img src="trophy.png" alt="Logo trofi"><div><strong>ANIMAL KAISER</strong><span>TOURNAMENT</span></div></div><span>BRACKET INTERAKTIF</span></header>
-    <div class="home-main"><div class="home-eyebrow">YOUR TOURNAMENT HUB</div><h1>Setiap pertandingan<br><em>menuju sang juara.</em></h1><p>Buat turnamen knockout 48 peserta, lanjutkan progres kapan saja, dan tentukan pemenang dengan satu klik. Progres tersimpan di browser ini; ekspor JSON untuk cadangan.</p><div class="home-actions"><button class="button primary home-create" id="home-new-button" type="button"><span>＋</span> Buat turnamen baru</button><button class="button home-import" id="home-import-button" type="button">↥ Impor JSON</button></div>
-      <div class="home-list-heading"><div><span>TURNAMEN ANDA</span><h2>Lanjutkan pertandingan</h2></div><span id="home-count">0 turnamen</span></div>
+    <header class="home-header">
+      <div class="brand">
+        <img src="trophy.png" alt="Logo trofi">
+        <div>
+          <strong>ANIMAL KAISER</strong>
+          <span>TOURNAMENT</span>
+        </div>
+      </div>
+      <span>BRACKET INTERAKTIF</span>
+    </header>
+
+    <div class="home-main">
+      <div class="home-eyebrow">YOUR TOURNAMENT HUB</div>
+      <h1>Setiap pertandingan<br><em>menuju sang juara.</em></h1>
+      <p>
+        Buat turnamen knockout 32, 48, atau 64 peserta, lanjutkan progres kapan saja, dan
+        tentukan pemenang dengan satu klik. Progres tersimpan di browser ini;
+        ekspor JSON untuk cadangan.
+      </p>
+
+      <div class="home-actions">
+        <button class="button primary home-create" id="home-new-button" type="button">
+          <span>＋</span> Buat turnamen baru
+        </button>
+        <button class="button home-import" id="home-import-button" type="button">
+          ↥ Impor JSON
+        </button>
+      </div>
+
+      <div class="home-list-heading">
+        <div>
+          <span>TURNAMEN ANDA</span>
+          <h2>Lanjutkan pertandingan</h2>
+        </div>
+        <span id="home-count">0 turnamen</span>
+      </div>
       <div class="home-list" id="home-list"></div>
     </div>
   </div>
+
   <div class="app-shell hidden" id="app-shell">
     <aside class="sidebar">
-      <div class="brand"><img src="trophy.png" alt="Logo trofi"><div><strong>ANIMAL KAISER</strong><span>TOURNAMENT</span></div></div>
+      <div class="brand">
+        <img src="trophy.png" alt="Logo trofi">
+        <div>
+          <strong>ANIMAL KAISER</strong>
+          <span>TOURNAMENT</span>
+        </div>
+      </div>
+
       <div class="sidebar-label">WORKSPACE</div>
-      <button class="nav-item" id="nav-home" type="button"><span class="nav-icon">⌂</span> Semua turnamen</button>
-      <button class="nav-item active" id="nav-bracket" type="button"><span class="nav-icon">▦</span> Bracket <span class="nav-arrow">›</span></button>
-      <button class="nav-item" id="nav-participants" type="button"><span class="nav-icon">♟</span> Peserta <span class="nav-count" id="nav-count">48</span></button>
+      <button class="nav-item" id="nav-home" type="button">
+        <span class="nav-icon">⌂</span> Semua turnamen
+      </button>
+      <button class="nav-item active" id="nav-bracket" type="button">
+        <span class="nav-icon">▦</span> Bracket <span class="nav-arrow">›</span>
+      </button>
+      <button class="nav-item" id="nav-participants" type="button">
+        <span class="nav-icon">♟</span> Peserta
+        <span class="nav-count" id="nav-count">48</span>
+      </button>
+
       <div class="sidebar-label tournament-label">TURNAMEN</div>
-      <div class="sidebar-tournament"><span class="tournament-dot"></span><div><strong id="sidebar-name">Piala Animal Kaiser</strong><small>Knockout · 48 peserta</small></div></div>
-      <div class="sidebar-bottom"><div class="sidebar-tip"><span>✦</span><strong>Tips singkat</strong><p>Klik kotak pertandingan untuk memilih pemenang dan meneruskannya ke ronde berikutnya.</p></div><span class="preview-tag">ANIMAL KAISER TOURNAMENT</span></div>
+      <div class="sidebar-tournament">
+        <span class="tournament-dot"></span>
+        <div>
+          <strong id="sidebar-name">Piala Animal Kaiser</strong>
+          <small id="sidebar-format">Knockout · 48 peserta</small>
+        </div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip">
+          <span>✦</span>
+          <strong>Tips singkat</strong>
+          <p>
+            Klik kotak pertandingan untuk memilih pemenang dan meneruskannya
+            ke ronde berikutnya.
+          </p>
+        </div>
+        <span class="preview-tag">ANIMAL KAISER TOURNAMENT</span>
+      </div>
     </aside>
 
     <main class="main-content">
-      <header class="topbar"><div class="breadcrumb"><button id="home-button" type="button">Semua turnamen</button> <span>/</span> <strong id="breadcrumb-name">Piala Animal Kaiser</strong></div><div class="top-actions"><span class="autosave-status" id="autosave-status">Tersimpan otomatis</span><button class="button subtle" id="load-button" type="button"><span>↥</span> Impor JSON</button><button class="button subtle" id="save-button" type="button"><span>↧</span> Ekspor JSON</button><button class="button primary" id="new-button" type="button"><span>＋</span> Turnamen baru</button></div></header>
-      <section class="content-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> TOURNAMENT OVERVIEW</div><h1 id="page-title">Piala Animal Kaiser</h1><p id="page-subtitle">Pantau setiap pertandingan, pilih pemenang, dan lihat jalan menuju juara.</p></div><div class="format-badge"><span class="badge-icon">◆</span><div><strong>Sistem knockout</strong><small>48 peserta · 16 bye</small></div></div></section>
-      <section class="stats-grid" aria-label="Ringkasan turnamen"><div class="stat-card"><div class="stat-top"><span>TOTAL PESERTA</span><span class="stat-symbol purple">♟</span></div><strong id="stat-participants">48</strong><small>Siap bertanding</small></div><div class="stat-card"><div class="stat-top"><span>PERTANDINGAN SELESAI</span><span class="stat-symbol orange">✓</span></div><strong id="stat-complete">0 <em>/ 47</em></strong><small id="stat-progress">0% progres turnamen</small></div><div class="stat-card"><div class="stat-top"><span>JUARA</span><span class="stat-symbol yellow">★</span></div><strong class="champion-stat" id="stat-champion">Belum ditentukan</strong><small id="champion-caption">Final menanti</small></div></section>
-      <section class="bracket-section" id="bracket-section"><div class="section-header"><div><div class="section-kicker">THE ROAD TO VICTORY</div><h2>Bracket turnamen</h2><p>Klik pertandingan yang siap dimainkan untuk menentukan pemenang.</p></div><div class="section-controls"><span class="legend"><i></i> Siap dimainkan</span><button class="button outline" id="reset-view" type="button">↔ Lihat awal</button></div></div><div class="round-strip" id="round-strip"></div><div class="bracket-scroll" id="bracket-scroll"><div class="bracket-canvas" id="bracket-canvas"></div></div><div class="bracket-footer"><span>↔ Geser ke samping untuk melihat semua ronde</span><span>48 PESERTA · 47 PERTANDINGAN</span></div></section>
-      <section class="participants-section hidden" id="participants-section"><div class="section-header"><div><div class="section-kicker">PLAYER ROSTER</div><h2>Daftar peserta</h2><p>Urutan berikut sesuai hasil undian awal.</p></div><button class="button outline" id="back-to-bracket" type="button">← Kembali ke bracket</button></div><div class="participant-grid" id="participant-grid"></div></section>
+      <header class="topbar">
+        <div class="breadcrumb">
+          <button id="home-button" type="button">Semua turnamen</button>
+          <span>/</span>
+          <strong id="breadcrumb-name">Piala Animal Kaiser</strong>
+        </div>
+        <div class="top-actions">
+          <span class="autosave-status" id="autosave-status">Tersimpan otomatis</span>
+          <button class="button subtle" id="load-button" type="button">
+            <span>↥</span> Impor JSON
+          </button>
+          <button class="button subtle" id="save-button" type="button">
+            <span>↧</span> Ekspor JSON
+          </button>
+          <button class="button primary" id="new-button" type="button">
+            <span>＋</span> Turnamen baru
+          </button>
+        </div>
+      </header>
+
+      <section class="content-intro">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-line"></span> TOURNAMENT OVERVIEW
+          </div>
+          <h1 id="page-title">Piala Animal Kaiser</h1>
+          <p id="page-subtitle">
+            Pantau setiap pertandingan, pilih pemenang, dan lihat jalan menuju juara.
+          </p>
+        </div>
+        <div class="format-badge">
+          <span class="badge-icon">◆</span>
+          <div>
+            <strong>Sistem knockout</strong>
+            <small id="format-details">48 peserta · 16 bye</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Ringkasan turnamen">
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>TOTAL PESERTA</span>
+            <span class="stat-symbol purple">♟</span>
+          </div>
+          <strong id="stat-participants">48</strong>
+          <small>Siap bertanding</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>PERTANDINGAN SELESAI</span>
+            <span class="stat-symbol orange">✓</span>
+          </div>
+          <strong id="stat-complete">0 <em>/ 47</em></strong>
+          <small id="stat-progress">0% progres turnamen</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>JUARA</span>
+            <span class="stat-symbol yellow">★</span>
+          </div>
+          <strong class="champion-stat" id="stat-champion">Belum ditentukan</strong>
+          <small id="champion-caption">Final menanti</small>
+        </div>
+      </section>
+
+      <section class="bracket-section" id="bracket-section">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">THE ROAD TO VICTORY</div>
+            <h2>Bracket turnamen</h2>
+            <p>Klik pertandingan yang siap dimainkan untuk menentukan pemenang.</p>
+          </div>
+          <div class="section-controls">
+            <span class="legend"><i></i> Siap dimainkan</span>
+            <button class="button outline" id="reset-view" type="button">
+              ↔ Lihat awal
+            </button>
+          </div>
+        </div>
+        <div class="round-strip" id="round-strip"></div>
+        <div class="bracket-scroll" id="bracket-scroll">
+          <div class="bracket-canvas" id="bracket-canvas"></div>
+        </div>
+        <div class="bracket-footer">
+          <span>↔ Geser ke samping untuk melihat semua ronde</span>
+          <span id="bracket-footer-count">48 PESERTA · 47 PERTANDINGAN</span>
+        </div>
+      </section>
+
+      <section class="participants-section hidden" id="participants-section">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">PLAYER ROSTER</div>
+            <h2>Daftar peserta</h2>
+            <p>Urutan berikut sesuai hasil undian awal.</p>
+          </div>
+          <button class="button outline" id="back-to-bracket" type="button">
+            ← Kembali ke bracket
+          </button>
+        </div>
+        <div class="participant-grid" id="participant-grid"></div>
+      </section>
     </main>
   </div>
 
-  <div class="modal-backdrop hidden" id="modal-backdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close" type="button" aria-label="Tutup">×</button><div class="modal-kicker" id="modal-kicker">TURNAMEN BARU</div><h2 id="modal-title">Buat turnamen</h2><p class="modal-description" id="modal-description"></p><div id="modal-body"></div><div class="modal-error hidden" id="modal-error" role="alert"></div><div class="modal-actions"><button class="button outline" id="modal-cancel" type="button">Batal</button><button class="button primary" id="modal-confirm" type="button">Buat bracket</button></div></div></div>
+  <div class="modal-backdrop hidden" id="modal-backdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Tutup">
+        ×
+      </button>
+      <div class="modal-kicker" id="modal-kicker">TURNAMEN BARU</div>
+      <h2 id="modal-title">Buat turnamen</h2>
+      <p class="modal-description" id="modal-description"></p>
+      <div id="modal-body"></div>
+      <div class="modal-error hidden" id="modal-error" role="alert"></div>
+      <div class="modal-actions">
+        <button class="button outline" id="modal-cancel" type="button">Batal</button>
+        <button class="button primary" id="modal-confirm" type="button">
+          Buat bracket
+        </button>
+      </div>
+    </div>
+  </div>
+
   <input type="file" id="file-input" accept=".json,.akt.json,application/json" hidden>
   <div class="toast hidden" id="toast" role="status"></div>
   <script src="app.js" defer></script>
